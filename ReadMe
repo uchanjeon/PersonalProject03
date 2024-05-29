@@ -1,0 +1,38 @@
+# 1. 기본 구성요소 만들기
+# 1.1 yarn init -y                : 프로젝트 초기화
+# 1.2 yarn add express            : express 라이브러리 설치 
+# # express                       : Node.js의 웹 프레임워크 중 하나로 웹 애플리케이션과 api를 쉽게 구축할 수 있다. 라우팅, 미들웨어 등을 이용할 수 있다.
+
+# 1.3 yarn add prisma             : prisma 라이브러리 설치 
+# # prisma                        : 데이터베이스(db)를 다루는 도구로 ORM과 유사한 기능을 제공한다. 데이터베이스 스키마를 기반으로 여러 데이터베이스 시스템(MYSQL, POSTGRESQL, SQLITE 등)과 호환된다.
+
+# 1.4 yarn add @prisma/client     : @prisma/client 라이브러리 설치
+# # @prisma/client                : 데이터베이스(DB)의 CRUD(CREATE READ, UPDATE, DELETE) 작업을 쉽게 수행할 수 있다. 이를 통해 개발자는 복잡한 SQL 쿼리를 직접 작성할 필요 없이 Prisma 모델을 사용하여
+# .                                 데이터 베이스와 상호 작용할 수 있다
+# .                                 즉 @prisma/client는 Prisma ORM에서 생성된 데이터베이스 모델을 기반으로 데이터베이스에 대한 타입 안전한 쿼리를 실행할 수 있게 해주는 라이브러리 이다.
+
+# 1.5 yarn add cookie-parser      : cookie-parser 라이브러리 설치 
+# # cookie-parser                 : express 애플리케이션에서 쿠키를 쉽게 파싱(=해석)하고 생성할 수 있도록 도와주는 미들웨어
+
+# 1.6 yarn add jsonwebtoken       : jsonwebtoken 라이브러리 설치 
+# 1.7 yarn add -D nodemon         : nodemon 라이브러리 설치 
+# .                               : nodemon이 작동하지 않을 경우 -> npm install -g nodemon 으로 nodemon을 ;   전역으로 설치
+# 1.8 npx prisma init             : npx prisma init
+# #                               : 실행할 경우 다음과 같은 일이 발생함
+# .                               1.8.1. 프로젝트 폴더 내에 Prisma 설정 파일과 관련 파일들이 생성됩니다.
+# .                               1.8.2. 데이터베이스 연결에 필요한 설정을 포함한 schema.prisma 파일이 생성됩니다. 이 파일에서는 데이터베이스 스키마를 정의하고 Prisma 모델을 설정할 수 있습니다.
+# .                               1.8.3. 필요한 경우, 데이터베이스 연결 URL 등의 설정을 수정할 수 있습니다.
+# .                               1.8.4. Prisma 클라이언트를 사용하여 데이터베이스에 쿼리를 보낼 수 있도록 설정됩니다
+# 1.9 npx prisma db push --force-reset
+
+# =================================================================================================================================================================================================
+
+# 2. schema.prisma를 통해 각 table의 형식 작성
+# 3. schema.prisma를 통해 각 table의 관계 작성
+# 4. .env를 통해 db 연결(aws -> rds)
+# 5. schema.prisma에서 연결한 db로 변경
+# 6. db에 업로드 (: npx prisma db push)
+
+# 7. 각 파일의 용도에 따라 폴더를 만들어서 구분
+# 8. router를 이용해 필요한 기능 구현
+# 9. bcrypt를 통해 password를 암호화

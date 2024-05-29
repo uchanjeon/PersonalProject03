@@ -1,0 +1,86 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+
+
+// Users와 UserInfos를 따로 만드는 이유
+// Users
+// 1.1 Users 정보에는 이메일과 비밀번호와 같은 중요정보를 저장
+// 1.2 회원가입 ,로그인 및 상세정보 조회에만 사용
+// UserInfos
+// 2.1 UserInfos 정보에는 기본 정보만 저장
+// 2.2 사용자 목록 및 정보 검색에만 사용
+
+model Users {
+  userId      Int       @id               @default(autoincrement()) @map("user_id")
+  email       String    @unique           @map("email")
+  password    String    @map("password")
+
+  createdAt   DateTime  @default(now())   @map("created_at")
+  updatedAt   DateTime  @updatedAt        @map("updated_at")
+
+  UserInfos UserInfos?
+  Characters Characters[]
+
+  @@map("Users")
+}
+
+model UserInfos {
+  userInfoId  Int     @id                 @default(autoincrement())   @map("user_info_id")
+  UserId      Int     @unique             @map("user_id")
+  name        String  @map("name")
+  age         Int?    @map("age")
+  gender      String  @map("gender")
+
+  createdAt   DateTime  @default(now())   @map("created_at")
+  updatedAt   DateTime  @updatedAt        @map("updated_at")
+
+  User Users @relation(fields: [UserId], references: [userId], onDelete: Cascade)
+
+  @@map("UserInfos")
+}
+
+model Characters {
+  characterId   Int     @id               @default(autoincrement())   @map("character_id")
+  UserId        Int     @map("user_id")
+  nickName      String  @unique           @map("nick_name")
+  health        Int?    @default(500)     @map("health")
+  power         Int?    @default(100)     @map("power")
+  money         Int?    @default(10000)   @map("money")
+
+  createdAt   DateTime  @default(now())   @map("created_at")
+  updatedAt   DateTime  @updatedAt        @map("updated_at")
+
+  User Users @relation(fields: [UserId], references: [userId], onDelete: Cascade)
+
+
+  @@map("Characters")  
+}
+
+model Items {
+  itemId      Int     @id             @default(autoincrement())   @map("item_id")
+  itemName    String  @unique         @map("item_name")
+  itemPrice   Int     @map("item_price")
+  Health      Int     @map("health")
+  Power       Int     @map("power")
+
+  createdAt   DateTime    @default(now())   @map("created_at")
+  updatedAt   DateTime    @updatedAt        @map("updated_at")
+
+  
+  @@map("Items")  
+}
+
+
