@@ -9,7 +9,7 @@ import errorHandingMiddleware from '../src/middlewares/error-handing.middleware.
 dotEnv.config();
 
 const app = express();
-const PORT = 2024;
+const PORT = process.env.DATABASE_PORT;
 
 app.use(express.json());
 app.use(cookieParser());
